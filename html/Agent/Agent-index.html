@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin-Agent</title>
+    <link rel="stylesheet" href="../../css/Agent/agent.css">
+
+    <!-- Include jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../../js/Agent/agent.js" defer></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="../../html/Agent/agent-index.html">Home</a></li>
+                <li><a href="../../html/Agent/Claims.html">Claims</a></li>
+                <li><a href="../../html/Agent/AddPolicy.html">Add Policy</a></li>
+                <li><a href="../../html/Customer/policy.html">View Policies</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Admin-Agent Dashboard</h1>
+        <div id="content"></div>
+    </div>
+
+    <script>
+        // Check login status and update navbar
+        const token = localStorage.getItem('token');
+        const role = localStorage.getItem('role');
+        if (token && role === 'Agent') {
+            $('#nav-links').append(`
+                <li><a href="../../html/Agent/agent-profile.html">Profile</a></li>
+                <li><a href="../../html/login.html" id="logout">Logout</a></li>
+            `);
+        } else {
+            $('#nav-links').append(`
+                <li><a href="../../html/login.html">Login</a></li>
+                <li><a href="../../html/register.html">Register</a></li>
+            `);
+        }
+
+        // Logout functionality
+        $('#logout').click(() => {
+            localStorage.clear();
+            window.location.href = '../../html/login.html';
+        });
+    </script>
+</body>
+</html>
